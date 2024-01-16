@@ -1,0 +1,19 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const { PORT } = require('./config/env');
+const productRoutes = require('./routes/productRoutes');
+const stockRoutes = require('./routes/stockRoutes');
+
+const app = express();
+
+app.use(express.json());
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: 'Internal Server Error' });
+});
+
+// Démarrer le serveur
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
