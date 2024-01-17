@@ -1,5 +1,14 @@
+const { addStock, getStocks } = require('../src/services/stockService');
 
-const { addStock } = require('../src/services/stockService');
+describe('getStocks', () => {
+    test('renvoie la liste des stocks', async () => {
+        const stocks = await getStocks();
+        expect(stocks).toEqual([
+            { id: 1, name: 'Stock A' },
+            { id: 2, name: 'Stock B' }
+        ]);
+    });
+});
 
 describe('addStock', () => {
     test('ajoute un stock valide', async () => {
