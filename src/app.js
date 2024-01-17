@@ -8,6 +8,10 @@ const app = express();
 
 app.use(express.json());
 
+// Intégration des routes
+//app.use('/products', productRoutes);
+app.use('/stocks', stockRoutes);
+
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: 'Internal Server Error' });
