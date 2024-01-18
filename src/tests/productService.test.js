@@ -6,7 +6,7 @@ const Stock = require('../models/Stock');
 describe('productService test', () => {
 
     beforeAll(async () => {
-        await mongoose.connect('mongodb://localhost:27017/Product_OFF_test', { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect('mongodb+srv://root:root@cluster0.upaj5kl.mongodb.net/Product_OFF_test', { useNewUrlParser: true, useUnifiedTopology: true });
     });
 
     afterAll(async () => {
