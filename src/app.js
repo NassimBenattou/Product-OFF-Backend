@@ -3,12 +3,18 @@ const mongoose = require('mongoose');
 const { PORT } = require('./config/env');
 const productRoutes = require('./routes/productRoutes');
 const stockRoutes = require('./routes/stockRoutes');
+const connectDB = require('./database');
+const cors = require('cors');
+
+connectDB();
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 // Intégration des routes
+app.use('/products', productRoutes);
 app.use('/stocks', stockRoutes);
 
 app.use((err, req, res, next) => {
