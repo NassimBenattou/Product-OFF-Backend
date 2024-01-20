@@ -1,6 +1,45 @@
 const Stock = require('../models/Stock');
 const Product = require('../models/Product');
 
+const addProduct = async(productName, productIngredient, productImg, productStock, quantity) => {
+    try {
+        const stock = await Stock.findOne({ _id: productStock });
+
+        if (!stock) {
+            console.log(`Stock not found for name: ${productStock}`);
+            throw new Error("Stock not found");
+        }
+
+        const newProduct = new Product({
+            name: productName,
+            ingredients: productIngredient,
+            image: productImg,
+            quantity: quantity,
+            stockId: stock._id,
+        });
+
+        console.log('New Product:', newProduct);
+
+        await newProduct.save();
+
+        stock.products.push({
+            name: newProduct.name,
+            ingredients: newProduct.ingredients,
+            image: newProduct.image,
+            quantity: newProduct.quantity,
+            productId: newProduct._id
+        });
+
+        await stock.save();
+
+        console.log('Product added successfully');
+
+        return newProduct;
+    } catch (error) {
+        throw new Error(`Error adding product: ${error.message}`);
+    }
+}
+
 const addProductToStock = async (productId, stockId) => {
 
     // Recherche du produit par son ID
@@ -23,8 +62,8 @@ const addProductToStock = async (productId, stockId) => {
 
 const getStockById = async (stockId) => {
     // Retourne le stock par son ID et ajoute les détails des produits associés
-    return await Stock.findById(stockId).populate('products');
+    return await Stock.findById(stockId);
 };
 
-module.exports = { addProductToStock, getStockById };
+module.exports = { addProduct, addProductToStock, getStockById };
 

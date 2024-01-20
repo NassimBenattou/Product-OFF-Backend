@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controller/productController');
 
+// Define the GET route for add product
+router.post('/add-product', productController.addProduct);
+
 // Define the GET route for add product to Stock
 router.post('/:productId/stock/:stockId', productController.addProductToStock);
 

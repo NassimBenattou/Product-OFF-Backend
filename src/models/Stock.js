@@ -5,7 +5,13 @@ const stockSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
+    products: [{
+        name: String,
+        ingredients: String,
+        image: String,
+        quantity: Number,
+        productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' }
+    }],
 });
 
 const Stock = mongoose.model('Stock', stockSchema);

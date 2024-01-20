@@ -1,5 +1,14 @@
 const productService = require('../services/productService');
 
+const addProduct = async (req, res) => {
+    try {
+        const result = await productService.addProduct(req.body._id, req.body.name, req.body.ingredients, req.body.image, req.body.stockId, req.body.quantity);
+        res.status(201).json(result);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    } 
+};
+
 // Ajouter un produit a un stock 
 const addProductToStock = async (req, res) => {
     try {
@@ -23,4 +32,4 @@ const getStockById = async (req, res) => {
     }
 };
 
-module.exports = { addProductToStock, getStockById };
+module.exports = { addProduct, addProductToStock, getStockById };
