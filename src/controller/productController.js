@@ -2,6 +2,7 @@ const productService = require('../services/productService');
 
 const addProduct = async (req, res) => {
     try {
+        console.log(req.body)
         const result = await productService.addProduct(req.body._id, req.body.name, req.body.ingredients, req.body.image, req.body.stockId, req.body.quantity);
         res.status(201).json(result);
     } catch (error) {

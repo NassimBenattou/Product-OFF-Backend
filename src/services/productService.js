@@ -15,7 +15,7 @@ const addProduct = async(productName, productIngredient, productImg, productStoc
             ingredients: productIngredient,
             image: productImg,
             quantity: quantity,
-            stockId: stock._id,
+            stockId: productStock,
         });
 
         console.log('New Product:', newProduct);

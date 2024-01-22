@@ -6,10 +6,10 @@ const stockSchema = new mongoose.Schema({
         required: true
     },
     products: [{
-        name: String,
-        ingredients: String,
-        image: String,
-        quantity: Number,
+        name: { type: String },
+        ingredients: {type: String },
+        image: { type: String },
+        quantity: { type: Number },
         productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' }
     }],
 });
